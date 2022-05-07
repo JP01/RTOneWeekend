@@ -6,6 +6,15 @@ cmake_minimum_required (VERSION 3.8)
 project ("RTOneWeekend")
 
 # Add source to this project's executable.
-add_executable (RTOneWeekend src/main.cc src/vec3.h src/color.h src/ray.h)
+add_executable (RTOneWeekend 
+	src/camera.h
+	src/color.h 
+	src/main.cc 
+	src/ray.h 
+	src/rtweekend.h
+	src/vec3.h 
 
-# TODO: Add tests and install targets if needed.
+	src/hittables/hittable.h 
+	src/hittables/hittable_list.h
+	src/hittables/sphere.h
+)
