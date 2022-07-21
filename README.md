@@ -13,3 +13,6 @@ I started taking screen shot examples as I went once I got about half way throug
 
 ### 2. Creating a dielectric material - eg: a glass ball
 <img src="output_images/RTOW_dielectric.png" width=400 height=225/>
+
+## 3. Added positionable camera with controllable FOV
+<img src="output_images/RTOW_positioned_camera.png" width=400 height=225/>
