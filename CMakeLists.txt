@@ -17,4 +17,4 @@ add_executable (RTOneWeekend
 	src/hittables/hittable.h 
 	src/hittables/hittable_list.h
 	src/hittables/sphere.h
-)
+ "src/material.h")
