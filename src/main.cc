@@ -6,8 +6,10 @@
 #include "hittables/sphere.h"
 #include "material.h"
 
+#include <chrono>
 #include <iostream>
 #include <fstream>
+
 
 color ray_color(const ray& r, const hittable& world, int depth) {
     hit_record rec;
@@ -41,7 +43,7 @@ int main() {
     // World
     hittable_list world;
 
-    auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
+   auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
     auto material_center = make_shared<lambertian>(color(0.1, 0.2, 0.5));
     auto material_left = make_shared<dielectric>(1.5);
     auto material_right = make_shared<metal>(color(0.8, 0.6, 0.2), 0.0);
@@ -49,15 +51,16 @@ int main() {
     world.add(make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
     world.add(make_shared<sphere>(point3(0.0, 0.0, -1.0), 0.5, material_center));
     world.add(make_shared<sphere>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
-    world.add(make_shared<sphere>(point3(-1.0, 0.0, -1.0), -0.45, material_left));
     world.add(make_shared<sphere>(point3(1.0, 0.0, -1.0), 0.5, material_right));
 
-    camera cam(point3(-2, 2, 1), point3(0, 0, -1), vec3(0, 1, 0), 90, aspect_ratio);
+    camera cam(point3(-2, 2, 1), point3(0, 0, -1), vec3(0, 1, 0), 50, aspect_ratio);
 
     // Render
     std::ofstream output_file;
     output_file.open("./image.ppm");
 
+    // Measure render time
+    auto start = std::chrono::steady_clock::now();
     output_file << "P3\n" << image_width << " " << image_height << "\n255\n";
     for (int j = image_height-1; j >= 0; --j) {
         std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
@@ -72,6 +75,11 @@ int main() {
             write_color(output_file, pixel_color, samples_per_pixel);
         }
     }
+
+    // Get the elapsed time and convert to milliseconds for printing
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed = (std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) / 1000.0;
+
     output_file.close();
-    std::cerr << "\nDone.\n";
+    std::cerr << "\nDone! Render took " << elapsed << " seconds.\n";
 }
