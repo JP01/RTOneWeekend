@@ -17,5 +17,10 @@ I started tracking render times in Debug builds when I added the camera in #3.
 
 ## 3. Added positionable camera with controllable FOV 
 Render Time: ~9.8s with no optimizations
+
 <img src="output_images/RTOW_positioned_camera.png" width=400 height=225/>
 
+## 4. Added defocus blur with controllable aperture size
+Render Time: ~12.2s with no optimizations
+
+<img src="output_images/RTOW_defocus_blur.png" width=400 height=225/>
