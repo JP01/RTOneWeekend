@@ -9,6 +9,7 @@
 #include <chrono>
 #include <iostream>
 #include <fstream>
+#include <string>
 
 
 color ray_color(const ray& r, const hittable& world, int depth) {
@@ -84,7 +85,7 @@ int main() {
     const int image_width = 400;
     const int image_height = static_cast<int>(image_width / aspect_ratio);
     const int samples_per_pixel = 50;
-    const int max_depth = 5;
+    const int max_depth = 20;
 
     // World
     auto world = random_scene();
@@ -99,7 +100,11 @@ int main() {
 
     // Render
     std::ofstream output_file;
-    output_file.open("./image.ppm");
+    std::string filename = "RTOW_w" + std::to_string(image_width);
+    filename += "_spp" + std::to_string(samples_per_pixel);
+    filename += "_d" + std::to_string(max_depth);
+    filename += ".ppm";
+    output_file.open(filename);
 
     // Measure render time
     auto start = std::chrono::steady_clock::now();
@@ -123,5 +128,6 @@ int main() {
     auto elapsed = (std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) / 1000.0;
 
     output_file.close();
-    std::cerr << "\nDone! Render took " << elapsed << " seconds.\n";
+
+    std::cerr << "\nDone! Written to " << filename << " -- Render took " << elapsed << " seconds.\n";
 }

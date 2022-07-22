@@ -32,8 +32,11 @@ Render Time: ~415.3s (6m 55s) with no optimizations
 <img src="output_images/RTOW_final_render.png" width=400 height=225/>
 
 
-## Notes on Debug vs Release
-I'm compiling in Visual Studio on Windows.
-For some reason I'm required to build in Debug as when building with release optimizations (Release x64 in visual studio) the image gets corrupted and is un-openable. 
-It doesn't seem to write out all the pixels which leads me to believe some optimization is blowing certain loops away?
-Not sure but should be investigated as it would greatly improve render times.
+# Optimization
+
+The final image render was pretty slow for such low resolution. Maybe we can speed it up!
+
+## Standard MSVC Release optimization
+Visual Studio can create a 'release' build which provides some standard optimizations.
+This brought the final image render time to around ~50s
+
