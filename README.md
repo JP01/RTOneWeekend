@@ -38,5 +38,8 @@ The final image render was pretty slow for such low resolution. Maybe we can spe
 
 ## Standard MSVC Release optimization
 Visual Studio can create a 'release' build which provides some standard optimizations.
-This brought the final image render time to around ~50s
+This brought the final image render time to around ~50s.
+
+## Other optimizations
+There are other optimizations we can do. I'll update as I work my way through.
 
